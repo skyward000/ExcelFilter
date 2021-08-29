@@ -11,6 +11,7 @@ public class UIOpenDialog : MonoBehaviour
 
     public InOutMode mode;
     public Text pathText;
+    public ParseData parseData;
     private Button _btn;
 
     private void Awake()
@@ -23,7 +24,7 @@ public class UIOpenDialog : MonoBehaviour
     {
         OpenFileName openFileName = new OpenFileName();
         openFileName.structSize = Marshal.SizeOf(openFileName);
-        openFileName.filter = "Excel文件(*.xlsx)\0*.xlsx";
+        //openFileName.filter = "Excel文件(*.xlsx)\0*.xlsx";
         openFileName.file = new string(new char[256]);
         openFileName.maxFile = openFileName.file.Length;
         openFileName.fileTitle = new string(new char[64]);
@@ -36,7 +37,12 @@ public class UIOpenDialog : MonoBehaviour
         {
             //Debug.Log(openFileName.file);
             //Debug.Log(openFileName.fileTitle);
+            pathText.text = openFileName.file;
+        }
 
+        if (mode == InOutMode.Input)
+        {
+            parseData.inputPath = openFileName.file;
         }
     }
     //void OnGUI()
