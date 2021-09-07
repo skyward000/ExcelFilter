@@ -3,23 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OptionData : MonoBehaviour
+public class OptionData
 {
-    public string optionName;
-    public OptionType optionType;
-    public string inputValue;
-
-    private void Awake()
-    {
-        //GetComponent<Dropdown>().itemText
-    }
+    public string dataName;
+    public int columnIndex;
+    public ValueType valueType;
+    public CompareType compareType;
+    public string value;
 
 }
 
-public enum OptionType
-{ 
+public enum CompareType
+{
     LessOrEqual,
     Equal,
+    NotEqual,
     GreaterOrEqual,
     None
+}
+
+public enum ValueType
+{
+    Float,
+    Date,
+    String
 }
