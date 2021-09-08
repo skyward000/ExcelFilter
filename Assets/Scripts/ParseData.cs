@@ -217,6 +217,8 @@ public class ParseData : MonoBehaviour
                         return cell.StringCellValue.Equals(data.value);
                     case CompareType.NotEqual:
                         return !cell.StringCellValue.Equals(data.value);
+                    case CompareType.Include:
+                        return cell.StringCellValue.Contains(data.value);
                     case CompareType.None:
                         return true;
                     default:
@@ -228,7 +230,7 @@ public class ParseData : MonoBehaviour
         }
     }
 
-    private void CreateSheet(List<IRow> results, List<OptionData> data)
+    private void CreateSheet(List<IRow> results, List<OptionData> optionData)
     {
         //for (int i = 0; i < results.Count; i++)
         //{
@@ -286,17 +288,33 @@ public class ParseData : MonoBehaviour
         //style2.VerticalAlignment = NPOI.SS.UserModel.VerticalAlignment.Center;//文字垂直对齐方式
 
 
+        //创建首行
+        rowToCreate = sheet.CreateRow(0);
+        rowToCreate.Height = 30 * 20;
+        for (int i = 0; i < optionData[optionData.Count - 1].columnIndex + 1; i++)
+        {
+            cellToCreate = rowToCreate.CreateCell(i);
+            if (i < optionData[0].columnIndex)
+                continue;
+
+            cellToCreate.SetCellValue(optionData[i - optionData[0].columnIndex].dataName);
+        }
+
+
+
         for (int i = 0; i < results.Count; i++)
         {
-            rowToCreate = sheet.CreateRow(i);
+            rowToCreate = sheet.CreateRow(i + 1);
             rowToCreate.Height = 30 * 20;
+
+            //创建数据行
             for (int j = 0; j < results[i].LastCellNum; j++)
             {
                 cellToCreate = rowToCreate.CreateCell(j);
                 if (results[i].GetCell(j) == null || results[i].GetCell(j).CellType == CellType.Blank)
                     continue;
 
-                if (j < data[0].columnIndex || j > data[data.Count - 1].columnIndex)
+                if (j < optionData[0].columnIndex || j > optionData[optionData.Count - 1].columnIndex)
                 {
                     switch (results[i].GetCell(j).CellType)
                     {
@@ -312,7 +330,7 @@ public class ParseData : MonoBehaviour
                 }
                 else
                 {
-                    switch (data[j - data[0].columnIndex].valueType)
+                    switch (optionData[j - optionData[0].columnIndex].valueType)
                     {
                         case ValueType.Float:
                             cellToCreate.SetCellValue(results[i].GetCell(j).NumericCellValue);

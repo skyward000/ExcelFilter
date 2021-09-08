@@ -1337,6 +1337,8 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: "\u5927\u4E8E\u7B49\u4E8E"
       m_Image: {fileID: 0}
+    - m_Text: "\u5305\u542B"
+      m_Image: {fileID: 0}
     - m_Text: "\u4E0D\u505A\u6BD4\u8F83"
       m_Image: {fileID: 0}
   m_OnValueChanged:
@@ -1566,7 +1568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

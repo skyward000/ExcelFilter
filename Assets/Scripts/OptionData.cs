@@ -19,6 +19,7 @@ public enum CompareType
     Equal,
     NotEqual,
     GreaterOrEqual,
+    Include,
     None
 }
 
