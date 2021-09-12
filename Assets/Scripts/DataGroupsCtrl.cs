@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DataGroupsCtrl : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class DataGroupsCtrl : MonoBehaviour
         for (int i = 0; i < names.Count; i++)
         {
             GameObject dataObj = Instantiate(dataGroupPf, transform);
+            dataObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(50, -60 * i);
             dataObj.GetComponent<UIDataGroup>().Init(names[i]);
             _groups.Add(dataObj);
         }
